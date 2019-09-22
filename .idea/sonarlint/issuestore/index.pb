@@ -13,3 +13,5 @@ j
 :app/src/test/java/br/com/alura/leilao/ExampleUnitTest.java,4/1/4186274567e0fd0a4bef9fa658fc5f9238f794a6
 k
 ;app/src/test/java/br/com/alura/leilao/model/LeilaoTest.java,5/b/5bc983dc21e81ade4140aa212005fc76e387d563
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164

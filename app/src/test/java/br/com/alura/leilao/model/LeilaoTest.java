@@ -38,16 +38,6 @@ public class LeilaoTest {
     }
 
     @Test
-    public void deve_devolverMaiorLance_quandoRecebeUmLanceEmOrdemDecrescente() {
-        CONSOLE.propoe(new Lance(ALEX, 2000.00));
-        CONSOLE.propoe(new Lance(new Usuario("Fran"), 900.00));
-
-        double maiorLanceDevolvido = CONSOLE.getMaiorLance();
-
-        assertEquals(2000.00, maiorLanceDevolvido, DELTA);
-    }
-
-    @Test
     public void deve_devolverMenorLance_QuandoRecebeUmLance() {
         CONSOLE.propoe(new Lance(ALEX, 200.00));
 
@@ -64,16 +54,6 @@ public class LeilaoTest {
         double menorLanceDevolvido = CONSOLE.getMenorLance();
 
         assertEquals(100.00, menorLanceDevolvido, DELTA);
-    }
-
-    @Test
-    public void deve_devolverMenorLance_quandoRecebeUmLanceEmOrdemDecrescente() {
-        CONSOLE.propoe(new Lance(ALEX, 2000.00));
-        CONSOLE.propoe(new Lance(new Usuario("Fran"), 900.00));
-
-        double menorLanceDevolvido = CONSOLE.getMenorLance();
-
-        assertEquals(900.00, menorLanceDevolvido, DELTA);
     }
 
     @Test
@@ -143,5 +123,61 @@ public class LeilaoTest {
         assertEquals(800.00, tresMaioresLancesDevolvidosParaQuatroLances.get(0).getValor(), DELTA);
         assertEquals(600.00, tresMaioresLancesDevolvidosParaQuatroLances.get(1).getValor(), DELTA);
         assertEquals(400.00, tresMaioresLancesDevolvidosParaQuatroLances.get(2).getValor(), DELTA);
+    }
+
+    @Test
+    public void deve_devolverZeroParaMaiorLance_quandoNaoTemLance() {
+        double maiorLanceDevolvido = CONSOLE.getMaiorLance();
+
+        assertEquals(0.0, maiorLanceDevolvido, DELTA);
+    }
+
+    @Test
+    public void deve_devolverZeroParaMenorLance_quandoNaoTemLance() {
+        double menorLanceDevolvido = CONSOLE.getMenorLance();
+
+        assertEquals(0.0, menorLanceDevolvido, DELTA);
+    }
+
+    @Test
+    public void naoDeve_adicionarLance_quandoForMenorQueMaiorLance() {
+        CONSOLE.propoe(new Lance(ALEX, 500.00));
+        CONSOLE.propoe(new Lance(new Usuario("Fran"), 400.00));
+
+        int quantidadeLancesDevolvida = CONSOLE.getQuantidadeLances();
+
+        assertEquals(1, quantidadeLancesDevolvida);
+    }
+
+    @Test
+    public void naoDeve_adicionarLance_quandoUsuarioForOMesmoDoUltimoLance() {
+        CONSOLE.propoe(new Lance(ALEX, 500.00));
+        CONSOLE.propoe(new Lance(new Usuario("Alex"), 600.00));
+
+        int quantidadeLancesDevolvida = CONSOLE.getQuantidadeLances();
+
+        assertEquals(1, quantidadeLancesDevolvida);
+    }
+
+    @Test
+    public void naoDeve_adicionarLance_quandoUsuarioDerCincoLances() {
+        Usuario FRAN = new Usuario("Fran");
+
+        CONSOLE.propoe(new Lance(ALEX, 100.00));
+        CONSOLE.propoe(new Lance(FRAN, 200.00));
+        CONSOLE.propoe(new Lance(ALEX, 300.00));
+        CONSOLE.propoe(new Lance(FRAN, 400.00));
+        CONSOLE.propoe(new Lance(ALEX, 500.00));
+        CONSOLE.propoe(new Lance(FRAN, 600.00));
+        CONSOLE.propoe(new Lance(ALEX, 700.00));
+        CONSOLE.propoe(new Lance(FRAN, 800.00));
+        CONSOLE.propoe(new Lance(ALEX, 900.00));
+        CONSOLE.propoe(new Lance(FRAN, 1000.00));
+        CONSOLE.propoe(new Lance(ALEX, 1100.00));
+        CONSOLE.propoe(new Lance(FRAN, 1200.00));
+
+        int quantidadeLancesDevolvidos = CONSOLE.getQuantidadeLances();
+
+        assertEquals(10, quantidadeLancesDevolvidos);
     }
 }
