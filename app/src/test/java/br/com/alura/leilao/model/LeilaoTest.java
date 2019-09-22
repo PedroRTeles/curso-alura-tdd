@@ -162,21 +162,22 @@ public class LeilaoTest {
     @Test
     public void naoDeve_adicionarLance_quandoUsuarioDerCincoLances() {
         Usuario FRAN = new Usuario("Fran");
+        Leilao console = new LeilaoBuilder("Console")
+                .lance(ALEX, 100.00)
+                .lance(FRAN, 200.00)
+                .lance(ALEX, 300.00)
+                .lance(FRAN, 400.00)
+                .lance(ALEX, 500.00)
+                .lance(FRAN, 600.00)
+                .lance(ALEX, 700.00)
+                .lance(FRAN, 800.00)
+                .lance(ALEX, 900.00)
+                .lance(FRAN, 1000.00)
+                .lance(ALEX, 1100.00)
+                .lance(FRAN, 1200.00)
+                .build();
 
-        CONSOLE.propoe(new Lance(ALEX, 100.00));
-        CONSOLE.propoe(new Lance(FRAN, 200.00));
-        CONSOLE.propoe(new Lance(ALEX, 300.00));
-        CONSOLE.propoe(new Lance(FRAN, 400.00));
-        CONSOLE.propoe(new Lance(ALEX, 500.00));
-        CONSOLE.propoe(new Lance(FRAN, 600.00));
-        CONSOLE.propoe(new Lance(ALEX, 700.00));
-        CONSOLE.propoe(new Lance(FRAN, 800.00));
-        CONSOLE.propoe(new Lance(ALEX, 900.00));
-        CONSOLE.propoe(new Lance(FRAN, 1000.00));
-        CONSOLE.propoe(new Lance(ALEX, 1100.00));
-        CONSOLE.propoe(new Lance(FRAN, 1200.00));
-
-        int quantidadeLancesDevolvidos = CONSOLE.getQuantidadeLances();
+        int quantidadeLancesDevolvidos = console.getQuantidadeLances();
 
         assertEquals(10, quantidadeLancesDevolvidos);
     }
